@@ -12,7 +12,7 @@ flag = False
 
 
 def start_game():
-
+    global best_sec, f_temp
     global computer
 
     def play():
@@ -32,6 +32,7 @@ def start_game():
         button.config(state=tk.DISABLED)
 
     def check_button(button):
+        global best_sec
         global computer
         if button["text"] == str(computer):
             button.config(state=tk.DISABLED)
@@ -47,6 +48,8 @@ def start_game():
             time.sleep(2)
             game_win.destroy()
             stat()
+
+
             flag = True
 
     computer = 1
@@ -79,11 +82,13 @@ def start_game():
                 but.grid(row=i, column=j, stick='wens')
         frame_top.grid_rowconfigure(i, minsize=80)
         frame_top.grid_columnconfigure(i, minsize=80)
+
     sec = 0
     if flag:
         temp = 0
+
     def tick():
-        global f_temp
+        global f_temp, best_sec
         nonlocal temp, after_id
         after_id = game_win.after(1000, tick)
         f_temp = datetime.fromtimestamp(temp).strftime('%M:%S')
@@ -93,18 +98,26 @@ def start_game():
 
     tick()
 
+
     game_win.mainloop()
+
+best_sec = 50
 
 def stat():
     global flag
     flag = True
-
+    global best_sec
     win_stat = tk.Tk()
     win_stat.geometry('300x300')
     label = tk.Label(win_stat, text="Статистика")
     label.place()
     label3 = tk.Label(win_stat, text=f'Текущее время: {f_temp}')
     label3.pack()
+    if int(f_temp[3:]) < best_sec:
+        best_sec = int(f_temp[3:])
+
+    label4 = tk.Label(win_stat, text=f'Лучшее время: 00:{best_sec:02}')
+    label4.pack()
     button = tk.Button(win_stat, text="Начать заново", command=start_game)
     button.pack()
     win_stat.mainloop()
