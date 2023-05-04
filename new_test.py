@@ -10,10 +10,11 @@ global computer
 f_temp = '00:00'
 flag = False
 
+
 def start_game():
 
     global computer
-    root.destroy()
+
     def play():
         pygame.mixer.music.load("samyi-korotkiy-zvuk-sms.mp3")
         pygame.mixer.music.play(0)
@@ -50,7 +51,7 @@ def start_game():
 
     computer = 1
     list_numbers = list(range(1, 9))
-    game_win = tk.Tk()
+    game_win = tk.Toplevel()
     temp = 0
     after_id = ''
 
@@ -86,6 +87,7 @@ def start_game():
         nonlocal temp, after_id
         after_id = game_win.after(1000, tick)
         f_temp = datetime.fromtimestamp(temp).strftime('%M:%S')
+        print(type(f_temp))
         label2.configure(text=f'Время: {f_temp}')
         temp += 1
 
@@ -101,10 +103,10 @@ def stat():
     win_stat.geometry('300x300')
     label = tk.Label(win_stat, text="Статистика")
     label.place()
-    label3 = tk.Label(win_stat, text=f'Лучшее время: {f_temp}')
-    label3.place(rely=0.5, relx=0.5, anchor=tk.CENTER)
+    label3 = tk.Label(win_stat, text=f'Текущее время: {f_temp}')
+    label3.pack()
     button = tk.Button(win_stat, text="Начать заново", command=start_game)
-    button.pack(pady=140, padx=50)
+    button.pack()
     win_stat.mainloop()
 
 
@@ -115,7 +117,6 @@ def main_win():
     button = tk.Button(root, text="Начать игру!", command=start_game)
     button.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
     root.mainloop()
-
 
 
 main_win()
