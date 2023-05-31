@@ -1,251 +1,364 @@
-# import turtle
-#
-# colors = ['blue', 'black', 'red', 'yellow', 'green']
-# turtle.pensize(5)
-# x = 210
-# turtle.speed(0)
-# for i in range(len(colors)):
-#     if i in (0, 1, 2):
-#         turtle.pencolor(colors[i])
-#         turtle.circle(100)
-#         turtle.penup()
-#         turtle.goto(x, 0)
-#         turtle.pendown()
-#         x += 210
-#     else:
-#         turtle
-#
-# turtle.done()
-# import turtle
-# turtle.speed(0)
-# r = 50
-# pensize = 10
-# turtle.Screen().setup(1000, 600)
-# turtle.pensize(pensize)
-#
-# points = {
-#           1: {"pos": (0, 0), "color": "cyan"},
-#           2: {"pos": (r * 2, 0), "color": "black"},
-#           3: {"pos": (r * 4, 0), "color": "red"},
-#           4: {"pos": (r, -r), "color": "orange"},
-#           5: {"pos": (r * 3, -r), "color": "chartreuse"}
-#           }
-#
-# for i in range(1, 6):
-#     turtle.penup()
-#     turtle.pencolor(points[i]["color"])
-#     turtle.goto(points[i]["pos"])
-#     turtle.pendown()
-#     turtle.circle(r - pensize / 2)
-# turtle.penup()
-# turtle.goto(50, -50)
-# turtle.pendown()
-# turtle.pencolor('orange')
-# turtle.speed(1)
-# turtle.circle(45, 45)
-# turtle.pencolor('black')
-# turtle.circle(45, 10)
-# turtle.pencolor('orange')
-# turtle.circle(45, 45)
-#
-#
-# turtle.done()
-# объявление функции
-
-# from __future__ import annotations
-# from typing import List, Dict
-#
-#
-# class Share:
-#     def __init__(self, ticker: str, quantity: int, price: float) -> None:
-#         self.ticker = ticker
-#         self.quantity = quantity
-#         self.price = price
-#
-#     def get_value(self, currency: str, rate: float) -> float:
-#         if currency == "RUB":
-#             return self.quantity * self.price * rate
-#         elif currency == "CNY":
-#             return self.quantity * self.price * rate
-#         elif currency == "USD":
-#             return self.quantity * self.price
-#
-#
-# class Bond:
-#     def __init__(self, ticker: str, face_value: float, coupon_rate: float, quantity: int, price: float) -> None:
-#         self.ticker = ticker
-#         self.face_value = face_value
-#         self.coupon_rate = coupon_rate
-#         self.quantity = quantity
-#         self.price = price
-#
-#     def get_value(self, currency: str, rate: float) -> float:
-#         try:
-#             if currency == "RUB":
-#                 return self.quantity * (self.face_value * self.coupon_rate / 100) * rate
-#             elif currency == "CNY":
-#                 return self.quantity * (self.face_value * self.coupon_rate / 100) * rate
-#             elif currency == "USD":
-#                 return self.quantity * self.face_value * self.coupon_rate / 100
-#             else:
-#                 raise ValueError("Unsupported currency")
-#         except ValueError as e:
-#             print(e)
-#
-#
-# class InvestorPortfolio:
-#     def __init__(self, shares: List[Share], bonds: List[Bond]) -> None:
-#         self.shares = shares
-#         self.bonds = bonds
-#
-#     def get_portfolio_value(self, currency: str, rate: float) -> Dict[str, float]:
-#         total_value = 0
-#         portfolio_value = {}
-#
-#         for share in self.shares:
-#             total_value += share.get_value(currency, rate)
-#             portfolio_value[share.ticker] = share.get_value(currency, rate)
-#
-#         for bond in self.bonds:
-#             total_value += bond.get_value(currency, rate)
-#             portfolio_value[bond.ticker] = bond.get_value(currency, rate)
-#
-#         portfolio_value["Total Value"] = total_value
-#
-#         return portfolio_value
-#
-#
-# sberbank = Share("SBER", 100, 200)
-# gazprom = Share("GAZP", 50, 300)
-# lukoil = Share("LKOH", 25, 500)
-# bond1 = Bond("MBT", 1000, 5, 10, 800)
-# bond2 = Bond("VTB", 500, 3, 50, 400)
-#
-# portfolio = InvestorPortfolio([sberbank, gazprom, lukoil], [bond1, bond2])
-# print(portfolio.get_portfolio_value("RUB", 70))
-# print(portfolio.get_portfolio_value("CNY", 6))
-# print(portfolio.get_portfolio_value("USD", 1))
-# from typing import List, Dict
-#
-#
-# class CurrencyMismatchError(Exception):
-#     pass
-#
-#
-# class Share:
-#     def __init__(self, ticker: str, quantity: int, price: float) -> None:
-#         if quantity < 0:
-#             raise ValueError("Quantity of shares cannot be negative")
-#         if price < 0:
-#             raise ValueError("Price per share cannot be negative")
-#         self.ticker = ticker
-#         self.quantity = quantity
-#         self.price = price
-#
-#     def get_value(self, currency: str, rate: float) -> float:
-#         if currency == "RUB":
-#             return self.quantity * self.price * rate
-#         elif currency == "CNY":
-#             return self.quantity * self.price * rate
-#         elif currency == "USD":
-#             return self.quantity * self.price
-#         else:
-#             raise ValueError("Unsupported currency")
-#
-#     def __str__(self):
-#         return f"{self.ticker}: {self.quantity} shares at {self.price} per share"
-#
-#
-# class Bond:
-#     def __init__(self, ticker: str, face_value: float, coupon_rate: float, quantity: int, price: float) -> None:
-#         if face_value < 0:
-#             raise ValueError("Face value of bond cannot be negative")
-#         if coupon_rate < 0:
-#             raise ValueError("Coupon rate of bond cannot be negative")
-#         if quantity < 0:
-#             raise ValueError("Quantity of bonds cannot be negative")
-#         if price < 0:
-#             raise ValueError("Price per bond cannot be negative")
-#         self.ticker = ticker
-#         self.face_value = face_value
-#         self.coupon_rate = coupon_rate
-#         self.quantity = quantity
-#         self.price = price
-#
-#     def get_value(self, currency: str, rate: float) -> float:
-#         if currency == "RUB":
-#             return self.quantity * (self.face_value * self.coupon_rate / 100) * rate
-#         elif currency == "CNY":
-#             return self.quantity * (self.face_value * self.coupon_rate / 100) * rate
-#         elif currency == "USD":
-#             return self.quantity * self.face_value * self.coupon_rate / 100
-#         else:
-#             raise ValueError("Unsupported currency")
-#
-#     def __str__(self):
-#         return f"{self.ticker}: {self.quantity} bonds at {self.price} per bond"
-#
-#
-# class InvestorPortfolio:
-#     def __init__(self, shares: List[Share], bonds: List[Bond]) -> None:
-#         self.shares = shares
-#         self.bonds = bonds
-#
-#     def get_portfolio_value(self, currency: str, rate: float) -> Dict[str, float]:
-#         if currency not in ['RUB', 'CNY', 'USD']:
-#             raise ValueError(f"Unsupported currency {currency}")
-#         total_value = 0
-#         portfolio_value = {}
-#
-#         for share in self.shares:
-#             if share.get_value(currency, rate) < 0:
-#                 raise CurrencyMismatchError(f"Value of {share.ticker} shares is negative in {currency}")
-#             total_value += share.get_value(currency, rate)
-#             portfolio_value[share.ticker] = share.get_value(currency, rate)
-#
-#         for bond in self.bonds:
-#             if bond.get_value(currency, rate) < 0:
-#                 raise CurrencyMismatchError(f"Value of {bond.ticker} bonds is negative in {currency}")
-#             total_value += bond.get_value(currency, rate)
-#             portfolio_value[bond.ticker] = bond.get_value(currency, rate)
-#
-#         portfolio_value["Total Value"] = total_value
-#
-#         return portfolio_value
-#
-#     def __str__(self):
-#         return f"Portfolio: \nShares: {[str(share) for share in self.shares]}\nBonds: {[str(bond) for bond in self.bonds]}"
-#
-# # Инициализируем акции и облигации
-#
-# sber = Share("SBER", 100, 200)
-# gazprom = Share("GAZP", 50, 300)
-# vtb = Bond("VTB", 500, 3, 50, 400)
-# mbt = Bond("MBT", 1000, 5, 10, 800)
-#
-# # Получаем стоимость акций в USD при курсе 1 USD = 75 RUB
-# sber_value = sber.get_value("USD", 75)
-#
-# # Получаем стоимость облигаций в CNY при курсе 1 CNY = 10 RUB
-# vtb_value = vtb.get_value("CNY", 0.1)
-#
-# # Создаем инвестиционный портфель из акций и облигаций
-# port = InvestorPortfolio([sber, gazprom], [vtb, mbt])
-#
-# # Получаем стоимость портфеля в USD при курсе 1 USD = 75 RUB
-# portfolio_value = port.get_portfolio_value("USD", 75)
-# print(portfolio_value)
-#
-# # Получаем стоимость портфеля в CNY при курсе 1 CNY = 10 RUB
-# portfolio_value = port.get_portfolio_value("CNY", 0.1)
-# print(portfolio_value)
 import tkinter as tk
-
-def open_new_window():
-    root.destroy()
-    new_window = tk.Tk()
-
+from random import *
+import pygame
+import time
+from datetime import datetime
+from PIL import Image, ImageTk
+pygame.init()
 root = tk.Tk()
-button = tk.Button(root, text="Open new window", command=open_new_window)
-button.pack()
+root.geometry('600x600')
+root.resizable(width=False, height=False)
+global counter
+counter = 0
+mistakes = 0
+global lbl
+global lbl1
+
+#----------------
+global computer
+f_temp = '00:00'
+flag = False
+open = False
+global win_stat
+
+
+def stat():
+    global open
+    global flag
+    global root
+
+    global best_sec
+    win_stat = tk.Toplevel()
+    open = True
+    win_stat.geometry('500x600+100+100')
+    label = tk.Label(win_stat, text="Статистика")
+    label.place()
+    label3 = tk.Label(win_stat, text=f'Текущее время: {f_temp}')
+    label3.pack()
+    if int(f_temp[3:]) < best_sec:
+        best_sec = int(f_temp[3:])
+
+    label4 = tk.Label(win_stat, text=f'Лучшее время: 00:{best_sec:02}')
+    label4.pack()
+    button = tk.Button(win_stat, text="Начать заново", command=start_game)
+    button.pack()
+    win_stat.mainloop()
+
+
+def start_game():
+    global best_sec, f_temp
+    global computer
+    global root
+    global win_stat
+    global open
+    global flag
+    if 'win_stat' in globals():
+        win_stat.destroy()
+    if flag:
+        root.destroy()
+        flag = False
+
+    def play():
+        pygame.mixer.music.load("samyi-korotkiy-zvuk-sms.mp3")
+        pygame.mixer.music.play(0)
+
+    def play1():
+        pygame.mixer.music.load("facebook-uvedomlenie_IWQFOPF1.mp3")
+        pygame.mixer.music.play(0)
+
+    def sound_victory():
+        pygame.mixer.music.load("victorrry.mp3")
+        pygame.mixer.music.play(0)
+
+    def link_button(link):
+        button = link
+        button.config(state=tk.DISABLED)
+
+    def check_button(button):
+        global best_sec
+        global computer
+        if button["text"] == str(computer):
+            button.config(state=tk.DISABLED)
+            computer += 1
+            label["text"] = f"Далее {computer}"
+            play1()
+        else:
+            play()
+        if button["text"] == 'b':
+            play()
+        if computer == 9:
+            flag = True
+            sound_victory()
+            time.sleep(2)
+            game_win.destroy()
+            stat()
+
+    computer = 1
+    list_numbers = list(range(1, 9))
+    game_win = tk.Toplevel()
+    temp = 0
+    after_id = ''
+
+    game_win.geometry("500x600+100+100")
+    frame_top = tk.Frame(game_win, width=700, height=700)
+    frame_top.place(x=100, y=150)
+    our_image = tk.PhotoImage(file="rec (1).png")
+    label = tk.Label(game_win, text=f"Далее {computer}", font=15)
+    label.place(x=100, y=50)
+    label2 = tk.Label(game_win, text=f"Время: 00:00 ", font=15)
+    label2.place(x=300, y=50)
+    for i in range(3):
+        for j in range(3):
+            if i == j == 1:
+
+                lbl = tk.Label(frame_top, image=our_image)
+
+                lbl.grid(row=i, column=j)
+
+            else:
+                number = choice(list_numbers)
+                list_numbers.remove(number)
+                but = tk.Button(frame_top, text=f"{number}", font=10)
+                but.config(command=lambda b=but: check_button(b))
+                but.grid(row=i, column=j, stick='wens')
+        frame_top.grid_rowconfigure(i, minsize=80)
+        frame_top.grid_columnconfigure(i, minsize=80)
+
+    sec = 0
+    if flag:
+        temp = 0
+
+    def tick():
+        global f_temp, best_sec
+        nonlocal temp, after_id
+
+        after_id = game_win.after(1000, tick)
+        f_temp = datetime.fromtimestamp(temp).strftime('%M:%S')
+        label2.configure(text=f'Время: {f_temp}')
+        temp += 1
+
+    tick()
+
+    game_win.mainloop()
+
+
+best_sec = 50
+
+
+def main_win():
+    global root
+
+    root = tk.Tk()
+    flag = True
+    root.geometry('500x600+100+100')
+    button = tk.Button(root, text="Начать игру!", command=start_game)
+    button.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+    root.mainloop()
+#--------------------
+colors = [
+    ('Красный', 'red'),
+    ('Оранжевый', 'orange'),
+    ('Желтый', 'yellow'),
+    ('Зеленый', 'green'),
+    ('Голубой', 'blue'),
+    ('Синий', 'dark blue'),
+    ('Розовый', 'violet'),
+    ('Коричневый', 'brown')
+]
+dict_colors = {
+
+'red': 'Красный',
+'orange': 'Оранжевый',
+'yellow': 'Желтый',
+'green': 'Зеленый',
+'blue': 'Голубой',
+'dark blue': 'Синий',
+'violet': 'Розовый',
+'brown':'Коричневый'
+
+}
+
+#
+# def start_game():
+#     random_color = randrange(len(colors))
+#     lbl.config(text=colors[random_color][0])
+#     interface()
+
+
+def play1():
+    pygame.mixer.music.load("facebook-uvedomlenie_IWQFOPF1.mp3")
+    pygame.mixer.music.play(0)
+
+
+def play():
+    pygame.mixer.music.load("samyi-korotkiy-zvuk-sms.mp3")
+    pygame.mixer.music.play(0)
+
+
+def change_color(button):
+    global counter, mistakes
+
+    global frame
+    solve = False
+
+    if lbl['text'] == dict_colors[button['background']]:
+        counter += 1
+
+        for obj in root.winfo_children():
+            obj.destroy()
+
+        game_color_easy()
+        play1()
+    else:
+        play()
+        mistakes += 1
+    if counter ==10:
+        stat()
+
+
+
+
+    # random_color = randrange(len(colors))
+    # lbl1.config(text=colors[random_color][0])
+
+start_time = None
+temp = 0
+after_id = 0
+lbl_time = tk.Label(root, text=f'Время: 00:00', font=12)
+
+def game_color_easy():
+    global flag
+    global lbl
+    global lbl1
+    global frame
+
+    global lbl
+
+    for obj in root.winfo_children():
+        # if obj != lbl_time:
+            obj.destroy()
+
+    frame = tk.Frame(root, padx=10)
+    lbl = tk.Label(frame, font=('Arial', 14))
+    random_color = randrange(len(colors))
+    lbl.config(text=colors[random_color][0])
+    lbl.grid(pady=50, row=0, column=0, columnspan=4, )
+    four_random_colors = [i % len(colors) for i in range(random_color, random_color + 4)]
+    shuffle(four_random_colors)
+    btn1 = tk.Button(frame, background=colors[four_random_colors[0]][1], width=5)
+    btn1.config(command=lambda b=btn1: change_color(b))
+    btn1.grid(row=5, column=0, padx=15)
+
+    btn2 = tk.Button(frame, background=colors[four_random_colors[1]][1], width=5)
+    btn2.config(command=lambda b=btn2: change_color(b))
+    btn2.grid(row=5, column=1, padx=15)
+
+    btn3 = tk.Button(frame, background=colors[four_random_colors[2]][1], width=5)
+    btn3.grid(row=5, column=2, padx=15)
+    btn3.config(command=lambda b=btn3: change_color(b))
+
+    btn4 = tk.Button(frame, background=colors[four_random_colors[3]][1], width=5)
+    btn4.grid(row=5, column=3, padx=15)
+    btn4.config(command=lambda b=btn4: change_color(b))
+
+    lbl_time = tk.Label(root, text=f'Время: 00:00', font=12)
+    lbl_time.pack(padx=100, pady=10)
+    lbl1 = tk.Label(root, text=f'Счет: {counter}', font=12)
+    lbl1.pack(padx=50)
+    frame.pack()
+
+
+
+# def tick():
+#     global temp, after_id, lbl_time
+#     if lbl_time in root.winfo_children():
+#         after_id = root.after(1000, tick)
+#     # f_temp = datetime.fromtimestamp(temp).strftime('%M:%S')
+#     time_str = time.strftime("%M:%S", time.gmtime(temp))
+#     lbl_time.configure(text=f'Время: {time_str}')
+#     temp += 1
+
+
+def start_game_color_easy():
+    global flag
+    flag = True
+    for obj in root.winfo_children():
+        obj.destroy()
+
+    start_button = tk.Button(root, text="Начать игру", command=game_color_easy)
+    start_button.place(relx=0.5, rely=0.5, anchor='center')
+
+
+def stat():
+    for obj in root.winfo_children():
+        obj.destroy()
+    tk.Label(root, text="Тренировка закончена!", font=('Ubunty', 14)).pack()
+    tk.Label(root,text=f"Количество ошибок: {mistakes}", font=('Ubunty', 14)).pack()
+    if mistakes > 0:
+        tk.Label(root, text="Постарайтесь ещё раз пройти тренировку без ошибок", font=('Ubunty', 14)).pack()
+# def start_timer():
+#     global lbl_time
+#     global start_time
+#     start_time = time.time()
+#     timer()
+#     game_color_easy()
+
+
+# def timer():
+#     global lbl_time
+#     global start_time
+#     if start_time is not None:
+#         seconds = time.time() - start_time
+#         time_str = time.strftime("%M:%S", time.gmtime(seconds))
+#         lbl_time.config(text=time_str)
+#         if time_str != "01:00":
+#             root.after(1000, timer)
+#         else:
+#             start_time = None
+
+
+
+# def start_game():
+#     #start_label = tk.Label(root, text='Упражнения\nдля cкорочтения', anchor='center')
+#     #start_label.pack()
+#     #button_Shulte = tk.Button(root, text='Таблица Шульте', width=20, height=2)
+#     #button_Shulte.pack()
+#     image_table = tk.PhotoImage(file='locator.png')
+#     # image_Shulte = ImageTk.PhotoImage(image_table)
+#     shulte_label = tk.Label(root, image=image_table, width=5, height=2)
+#     shulte_label.pack()
+
+# interface()
+
+# start_game()
+
+
+image_table = tk.PhotoImage(file='locator.png')
+image_color = tk.PhotoImage(file='color-blindness-test (1).png')
+
+
+def menu():
+    # root['bg'] = '#F4EEE1'
+    frame_for_menu = tk.Frame(root)
+    # frame_for_menu['bg'] = '#F4EEE1'
+    name_label = tk.Label(frame_for_menu, text='Упражнения\nдля скорочтения', font=('Comic Sans MS', 14),
+                          # background='#F4EEE1'
+                          )
+    name_label.grid(row=0, column=0, sticky='we', columnspan=2, pady=50)
+    shulte_label = tk.Label(frame_for_menu, image=image_table)
+    shulte_label.grid(row=1, column=0)
+    btn_shulte = tk.Button(frame_for_menu, text="Таблица Шульте", font=('Comic Sans MS', 12), command=main_win)
+    btn_shulte.grid(row=1, column=1, sticky='ns', padx=7)
+    color_label = tk.Label(frame_for_menu, image=image_color)
+    color_label.grid(row=2, column=0, pady=30)
+    btn_color = tk.Button(frame_for_menu, text="Назови цвет", font=('Comic Sans MS', 12), command=start_game_color_easy)
+    btn_color.grid(row=2, column=1, sticky='we', padx=7)
+    frame_for_menu.pack(anchor='nw', padx=170)
+
+
+menu()
+
+
+
+
 root.mainloop()
