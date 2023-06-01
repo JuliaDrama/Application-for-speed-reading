@@ -3,7 +3,7 @@ Development of an open source project "Application for training speed reading"
 
 In this application, you can train your speed reading skills on the Schulte table exercise!
 The following exercises have been developed so far:
-  1.Schulte table for the development of peripheral vision and concentration
+  1. Schulte table for the development of peripheral vision and concentration
   2. Color Guessing: Generate words and need to select the color of the block whose color is written
  
 Development plans:
