@@ -11,5 +11,5 @@ Development plans:
 Как вставить картинку в README.md на GitHub
 
 
-https://github.com/JuliaDrama/Application-for-speed-reading/raw/main/{"C:\projects\test}/2204_w037_n003_298b_p1_298.jpg")
+![Image alt](https://github.com/JuliaDrama/Application-for-speed-reading/blob/main/2204_w037_n003_298b_p1_298.jpg)
 
