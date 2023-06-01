@@ -8,3 +8,8 @@ The following exercises have been developed so far:
 Development plans:
   1. Add two more difficulty levels for guessing words: the middle level, where you need to select a background color, that is, the words of the color names will be given, written in black and a difficult level where you need to choose the word that is written in color and on a colored background, the words of the names of the colors will be given, which are also written in different colors.
   2. Allow the user to adjust the number of rows and columns in the table
+Как вставить картинку в README.md на GitHub
+
+
+![Image alt](https://github.com/JuliaDrama/Application-for-speed-reading/raw/master/{"C:\projects\test}/2204_w037_n003_298b_p1_298.jpg")
+
